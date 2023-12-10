@@ -1,0 +1,9 @@
+
+<% if user_signed_in? %>
+    <%= button_to "Log Out", 'users/sign_out', method: :delete %>
+<% else %>
+    <%= button_to "Log In", 'users/sign_in', method: :get %>
+    <%= button_to "Sign Up", 'users/sign_up', method: :get %>
+<% end %>
+
+
