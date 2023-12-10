@@ -1,21 +1,38 @@
 <div>
 
 <% if user_signed_in? %>
-    <p style="color: green"><%= notice %></p>
 
-    <h1 class="text-3xl font-bold underline">Short links</h1>
+    <div class="flex items-center text-center justify-center">
+        <p style="color: green"><%= notice %></p>
+
+        <h1 class="text-2xl font-bold underline text-center mr-5">Short links</h1>
+
+        <%= button_to "+", new_short_link_path, method: :get, class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" %>
+
+    </div>
 
     <div id="short_links">
-    <% @short_links.each do |short_link| %>
-        <%= render short_link %>
-        <br>
-        <p>
-        <%= button_to "Show", short_link, method: :get, class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" %>    
-        </p>
-    <% end %>
+        <% if @short_links %>
+            <div class="flex items-center text-center justify-center">
+                <table class="table-fixed w-3/6 bg-white-500 border-separate border-spacing-1 border-collapse border border-slate-500 mt-2">
+                    <thead>
+                    <tr>
+                        <th class="border border-slate-600">Short Url</th>
+                        <th class="border border-slate-600">Url</th>
+                        <th class="border border-slate-600">Expiration Date</th>
+                        <th class="border border-slate-600">Password</th>
+                        <th class="border border-slate-600">Usages</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        <% @short_links.each do |short_link| %>
+                            <%= render short_link %>
+                        <% end %>
+                    </tbody>
+                </table>
+                </div>
+        <% end %>
     </div>
-    <br>
-    <%= button_to "New", new_short_link_path, method: :get, class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" %>
 <% end %>
 
 </div>

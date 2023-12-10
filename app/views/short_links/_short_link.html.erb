@@ -1,32 +1,20 @@
-<div id="<%= dom_id short_link %>">
- <table class="table-fixed">
-    <thead>
-      <tr>
-        <th>Short Url</th>
-        <th>Url</th>
-        <th>Expiration Date</th>
-        <th>Password</th>
-        <th>Usages</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>
-          <%= short_link.short_url %>
-        </td>
-        <td>
-          <%= short_link.url %>
-        </td>
-        <td>
-          <%= short_link.expiration_date %>
-        </td>
-        <td>
-          <%= short_link.password %>
-        </td>
-        <td>
-          <%= short_link.usages %>
-        </td>
-      </tr>
-    </tbody>
-  </table> 
-</div>
+<tr>
+  <td class="border border-slate-700">
+    <%= short_link.short_url %>
+  </td>
+  <td class="border border-slate-700">
+    <%= short_link.url %>
+  </td>
+  <td class="border border-slate-700">
+    <%= short_link.expiration_date ? short_link.expiration_date : "N/A"%>
+  </td>
+  <td class="border border-slate-700">
+    <%= short_link.password != "" ? short_link.password : "N/A"%>
+  </td>
+  <td class="border border-slate-700">
+    <%= short_link.usages ? short_link.usages : "N/A"%>
+  </td>
+  <td>        
+    <%= button_to "Show", short_link, method: :get, class: "bg-sky-500 hover:bg-sky-700 text-white font-bold py-2 px-4 rounded" %>
+  </td>
+</tr>
