@@ -1,24 +1,21 @@
-
-<% if user_signed_in? %>
-    <%= button_to "Log Out", 'users/sign_out', method: :delete %>
-<% else %>
-    <%= button_to "Log In", 'users/sign_in', method: :get %>
-    <%= button_to "Sign Up", 'users/sign_up', method: :get %>
-<% end %>
+<div>
 
 <% if user_signed_in? %>
     <p style="color: green"><%= notice %></p>
 
-    <h1>Short links</h1>
+    <h1 class="text-3xl font-bold underline">Short links</h1>
 
     <div id="short_links">
     <% @short_links.each do |short_link| %>
         <%= render short_link %>
+        <br>
         <p>
-        <%= link_to "Show this short link", short_link %>
+        <%= button_to "Show", short_link, method: :get, class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" %>    
         </p>
     <% end %>
     </div>
-
-    <%= link_to "New short link", new_short_link_path %>
+    <br>
+    <%= button_to "New", new_short_link_path, method: :get, class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" %>
 <% end %>
+
+</div>

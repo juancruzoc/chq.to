@@ -5,12 +5,54 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+    <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet"> 
   </head>
 
   <body>
-    <%= yield %>
+    <div class="flex flex-col h-screen justify-between">
+      <Header>
+        <nav class="bg-gray-800">
+          <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
+              <div class="relative flex h-16 items-center justify-between">
+                  <p class="text-2xl font-['Lobster'] text-white">CHQ.TO</p>
+                  <div class="absolute inset-y-0 right-0 flex items-center">
+                      <% if user_signed_in? %>
+                          <%= button_to "Log Out", 'users/sign_out', method: :delete, class: "bg-sky-500 hover:bg-sky-700 text-white font-bold py-2 px-4 rounded" %>
+                      <% else %>
+                          <%= button_to "Log In", 'users/sign_in', method: :get, class: "bg-sky-500 hover:bg-sky-700 text-white font-bold py-2 px-4 mr-4 rounded" %>
+                          <%= button_to "Sign Up", 'users/sign_up', method: :get, class: "bg-sky-500 hover:bg-sky-700 text-white font-bold py-2 px-4 rounded" %>
+                      <% end %>
+                  </div>
+              </div>
+          </div>
+        </nav>
+      </Header>
+      <main class="h-screen flex items-center justify-center">      
+        <%= yield %>
+      </main>
+      <footer class="bg-gray-800 rounded-lg shadow m-4">
+        <div class="w-full mx-auto max-w-screen-xl p-4 md:flex md:items-center md:justify-between">
+          <span class="text-sm text-gray-500 sm:text-center dark:text-gray-400">© 2023 <a href="https://flowbite.com/" class="hover:underline text-base font-['Lobster'] text-white">CHQ.TO</a>. All Rights Reserved.
+          </span>
+          <ul class="flex flex-wrap items-center mt-3 text-sm font-medium text-gray-500 dark:text-gray-400 sm:mt-0">
+              <li>
+                  <a href="#" class="hover:underline me-4 md:me-6">About</a>
+              </li>
+              <li>
+                  <a href="#" class="hover:underline me-4 md:me-6">Licensing</a>
+              </li>
+              <li>
+                  <a href="#" class="hover:underline">Contact</a>
+              </li>
+          </ul>
+        </div>
+      </footer>
+    </div>
   </body>
 </html>

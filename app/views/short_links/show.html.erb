@@ -3,8 +3,8 @@
 <%= render @short_link %>
 
 <div>
-  <%= link_to "Edit this short link", edit_short_link_path(@short_link) %> |
-  <%= link_to "Back to short links", root_path %>
+  <%= button_to "Edit", edit_short_link_path(@short_link), method: :get, class: "bg-sky-500 hover:bg-sky-700 text-white font-bold py-2 px-4 rounded" %>
+  <%= button_to "Back", root_path, method: :get, class: "bg-sky-500 hover:bg-sky-700 text-white font-bold py-2 px-4 rounded" %>
 
-  <%= button_to "Destroy this short link", @short_link, method: :delete %>
+  <%= button_to "Delete", @short_link, method: :delete, class: "bg-sky-500 hover:bg-sky-700 text-white font-bold py-2 px-4 rounded" %>
 </div>
