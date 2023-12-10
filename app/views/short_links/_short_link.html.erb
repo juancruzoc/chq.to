@@ -1,0 +1,28 @@
+<div id="<%= dom_id short_link %>">
+ <table>
+    <tr>
+      <th>Short Url</th>
+      <th>Url</th>
+      <th>Expiration Date</th>
+      <th>Password</th>
+      <th>Usages</th>
+    </tr>
+    <tr>
+      <td>
+        <%= short_link.short_url %>
+      </td>
+      <td>
+        <%= short_link.url %>
+      </td>
+      <td>
+        <%= short_link.expiration_date %>
+      </td>
+      <td>
+        <%= short_link.password %>
+      </td>
+      <td>
+        <%= short_link.usages %>
+      </td>
+    </tr>
+  </table> 
+</div>

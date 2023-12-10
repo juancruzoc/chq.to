@@ -6,4 +6,19 @@
     <%= button_to "Sign Up", 'users/sign_up', method: :get %>
 <% end %>
 
+<% if user_signed_in? %>
+    <p style="color: green"><%= notice %></p>
 
+    <h1>Short links</h1>
+
+    <div id="short_links">
+    <% @short_links.each do |short_link| %>
+        <%= render short_link %>
+        <p>
+        <%= link_to "Show this short link", short_link %>
+        </p>
+    <% end %>
+    </div>
+
+    <%= link_to "New short link", new_short_link_path %>
+<% end %>
