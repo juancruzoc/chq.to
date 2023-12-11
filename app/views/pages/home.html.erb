@@ -3,7 +3,6 @@
 <% if user_signed_in? %>
 
     <div class="flex items-center text-center justify-center">
-        <p style="color: green"><%= notice %></p>
 
         <h1 class="text-2xl font-bold underline text-center mr-5">Short links</h1>
 
@@ -32,6 +31,16 @@
                 </table>
                 </div>
         <% end %>
+    </div>
+<% else %>
+    <div class="flex items-center text-center justify-center grid grid-cols-12 content-start">
+        <div class="col-start-2 col-span-4 ml-8">
+            <p class="text-2xl font-bold">Create shortened URLs to easily enforce the connection between your content and your audience across the internet.</p>
+        </div>
+
+        <div class="col-start-7 col-span-4 ml-8">
+            <%= image_tag("shortened.png") %>
+        </div>
     </div>
 <% end %>
 

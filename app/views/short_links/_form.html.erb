@@ -12,36 +12,40 @@
   <% end %>
 
   <div>
-    <%= form.label :user_id, style: "display: block" %>
-    <%= form.number_field :user_id %>
+    <%= form.number_field :user_id, :value => current_user.id, class: "form-control hidden" %>
   </div>
 
   <div>
-    <%= form.label :short_url, style: "display: block" %>
-    <%= form.text_field :short_url %>
+    <%= form.label :short_url, style: "display: block", class:"block text-gray-700 text-sm font-bold" %>
+    <%= form.text_field :short_url, class:"shadow appearance-none border rounded text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-8" %>
   </div>
 
   <div>
-    <%= form.label :url, style: "display: block" %>
-    <%= form.text_field :url %>
+    <%= form.label :url, style: "display: block", class:"block text-gray-700 text-sm font-bold" %>
+    <%= form.text_field :url, class:"shadow appearance-none border rounded text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-8" %>
   </div>
 
   <div>
-    <%= form.label :expiration_date, style: "display: block" %>
-    <%= form.datetime_field :expiration_date %>
+    <%= form.label :expiration_date, style: "display: block", class:"block text-gray-700 text-sm font-bold" %>
+    <%= form.datetime_field :expiration_date, class:"shadow appearance-none border rounded text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-8" %>
   </div>
 
   <div>
-    <%= form.label :password, style: "display: block" %>
-    <%= form.text_field :password %>
+    <%= form.label :password, style: "display: block", class:"block text-gray-700 text-sm font-bold" %>
+    <%= form.text_field :password, class:"shadow appearance-none border rounded text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-8" %>
   </div>
 
   <div>
-    <%= form.label :usages, style: "display: block" %>
-    <%= form.number_field :usages %>
+    <%= form.label :usages, style: "display: block", class:"block text-gray-700 text-sm font-bold" %>
+    <%= form.number_field :usages, class:"shadow appearance-none border rounded text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-8" %>
   </div>
 
   <div>
-    <%= form.submit %>
+    <% if is_edit == true %>
+      <%= button_to form.submit "Edit short link", class: "bg-sky-500 hover:bg-sky-700 text-white font-bold py-2 px-4 rounded mt-4" %>
+    <% else %> 
+      <%= button_to form.submit "Create short link", class: "bg-sky-500 hover:bg-sky-700 text-white font-bold py-2 px-4 rounded mt-4" %>
+    <% end %> 
+    <%= button_to "Back", root_path, method: :get, class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4" %> 
   </div>
 <% end %>
