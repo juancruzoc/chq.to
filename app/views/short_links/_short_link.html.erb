@@ -1,9 +1,9 @@
 <tr>
   <td class="border border-slate-700">
-    <%= short_link.short_url %>
+    <%= link_to short_link.short_url, short_link.short_url, class: "text-sky-700 hover:underline hover:text-sky-900" %>
   </td>
   <td class="border border-slate-700">
-    <%= short_link.url %>
+    <%= link_to short_link.url, short_link.url, class: "text-sky-700 hover:underline hover:text-sky-900" %>
   </td>
   <td class="border border-slate-700">
     <%= short_link.expiration_date ? short_link.expiration_date : "N/A"%>
@@ -14,7 +14,7 @@
   <td class="border border-slate-700">
     <%= short_link.usages ? short_link.usages : "N/A"%>
   </td>
-  <td>        
+  <td class="border border-slate-700">        
     <%= button_to "Show", short_link, method: :get, class: "bg-sky-500 hover:bg-sky-700 text-white font-bold py-2 px-4 rounded" %>
   </td>
 </tr>

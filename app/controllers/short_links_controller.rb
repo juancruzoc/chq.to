@@ -22,6 +22,7 @@ class ShortLinksController < ApplicationController
   # POST /short_links or /short_links.json
   def create
     @short_link = ShortLink.new(short_link_params)
+    @short_link.short_url = "http://127.0.0.1:3000/l/" + Digest::SHA256.hexdigest(@short_link.url).first(7)
 
     respond_to do |format|
       if @short_link.save

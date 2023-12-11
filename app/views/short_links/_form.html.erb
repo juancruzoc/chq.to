@@ -14,12 +14,7 @@
   <div>
     <%= form.number_field :user_id, :value => current_user.id, class: "form-control hidden" %>
   </div>
-
-  <div>
-    <%= form.label :short_url, style: "display: block", class:"block text-gray-700 text-sm font-bold" %>
-    <%= form.text_field :short_url, class:"shadow appearance-none border rounded text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-8" %>
-  </div>
-
+  
   <div>
     <%= form.label :url, style: "display: block", class:"block text-gray-700 text-sm font-bold" %>
     <%= form.text_field :url, class:"shadow appearance-none border rounded text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-8" %>
@@ -27,17 +22,17 @@
 
   <div>
     <%= form.label :expiration_date, style: "display: block", class:"block text-gray-700 text-sm font-bold" %>
-    <%= form.datetime_field :expiration_date, class:"shadow appearance-none border rounded text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-8" %>
+    <%= form.datetime_field :expiration_date, min: Date.today+1, class:"shadow appearance-none border rounded text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-8" %>
   </div>
 
   <div>
     <%= form.label :password, style: "display: block", class:"block text-gray-700 text-sm font-bold" %>
-    <%= form.text_field :password, class:"shadow appearance-none border rounded text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-8" %>
+    <%= form.password_field :password, class:"shadow appearance-none border rounded text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-8" %>
   </div>
 
   <div>
     <%= form.label :usages, style: "display: block", class:"block text-gray-700 text-sm font-bold" %>
-    <%= form.number_field :usages, class:"shadow appearance-none border rounded text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-8" %>
+    <%= form.number_field :usages, min: 0, class:"shadow appearance-none border rounded text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-8" %>
   </div>
 
   <div>
