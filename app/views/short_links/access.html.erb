@@ -1,0 +1,6 @@
+<div class="flex items-center text-center justify-center">
+    <h1 class="text-xl font-bold text-center mr-2">Redirecting to: </h1>
+    <meta http-equiv="REFRESH" content="5; url=http://<%= @short_link.url %>" %="">
+    <%= link_to @short_link.url, "http://#{@short_link.url}", class: "text-sky-700 text-xl hover:underline hover:text-sky-900" %>
+    <h1 class="text-xl font-bold text-center ml-2"> in 5 seconds.</h1>
+</div>

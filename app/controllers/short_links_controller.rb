@@ -10,6 +10,11 @@ class ShortLinksController < ApplicationController
   def show
   end
 
+  # GET /access/1 or /short_links/1.json
+  def access
+    @short_link = ShortLink.where('short_url': params[:short_url])[0]
+  end
+
   # GET /short_links/new
   def new
     @short_link = ShortLink.new
@@ -22,7 +27,7 @@ class ShortLinksController < ApplicationController
   # POST /short_links or /short_links.json
   def create
     @short_link = ShortLink.new(short_link_params)
-    @short_link.short_url = "http://127.0.0.1:3000/l/" + Digest::SHA256.hexdigest(@short_link.url).first(7)
+    @short_link.short_url = Digest::SHA256.hexdigest(@short_link.url).first(7)
 
     respond_to do |format|
       if @short_link.save
