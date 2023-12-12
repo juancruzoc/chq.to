@@ -1,24 +1,17 @@
-# README
+# CHQ.TO
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Table of Contents
 
-Things you may want to cover:
+- [Technical information](#technical-information)
+	- [Ruby version](#ruby-version)
+	- [Ruby on Rails version](#ruby-on-rails-version)
+	- [DataBase specification](#database-specification)
 
-* Ruby version
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+## Technical information
+### Ruby version
+ruby 3.2.2 (2023-03-30 revision e51014f9c0) [x86_64-linux]
+### Ruby on Rails version
+Rails 7.1.2
+### DataBase specification
+Rails default SQLite db.
