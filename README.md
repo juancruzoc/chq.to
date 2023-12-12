@@ -12,7 +12,7 @@
 	- [Links types](#links-types)
  	- [Links access](#links-access)
  	- [Links reports](#links-reports)
-  - [UI/Frontend](#ui/frontend)
+  - [UI/Frontend](#uifrontend)
  	- [Technical specification](#technical-specification)
     	
 
