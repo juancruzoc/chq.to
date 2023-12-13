@@ -39,3 +39,13 @@ To do
 ## UI/Frontend
 ### Technical specification
 Used the default js provided by Rails, [Tailwind](https://tailwindcss.com/) was incorporated for the css views.
+
+## Setup
+### Prerequires
+Have ruby, rails and npm installed.
+
+### Steps
+Run bundle install
+rails db:migrate
+npm install
+
