@@ -6,7 +6,7 @@
     <%= link_to short_link.url, short_link.url, class: "text-sky-700 hover:underline hover:text-sky-900" %>
   </td>
   <td class="border border-slate-700">
-    <%= short_link.expiration_date ? short_link.expiration_date : "N/A"%>
+    <%= short_link.expiration_date ? short_link.expiration_date.to_date : "N/A"%>
   </td>
   <td class="border border-slate-700">
     <%= short_link.password != "" ? short_link.password : "N/A"%>

@@ -13,6 +13,54 @@ class ShortLinksController < ApplicationController
   # GET /access/1 or /short_links/1.json
   def access
     @short_link = ShortLink.where('short_url': params[:short_url])[0]
+
+    @password_validated = false
+    @messages = ""
+
+    @password = params.has_key?(:password) ? params.require(:password) : ""
+
+    if @password and @password == @short_link.password
+      
+      @password_validated = true
+
+    else
+
+      if @password != ""
+
+        @password_validated = false
+        @messages = "Incorrect password."
+
+      end
+
+    end
+
+  end
+
+  def validate_password
+
+    @short_link = ShortLink.where('short_url': params[:short_url])[0]
+
+    @password_validated = false
+    @messages = ""
+
+    @password = params.has_key?(:password) ? params.require(:password) : ""
+
+    if @password and @password == @short_link.password
+      
+      @password_validated = true
+      # redirect_to @short_link.url
+
+    else
+
+      if @password != ""
+
+        @password_validated = false
+        @messages = "Incorrect password."
+
+      end
+
+    end
+
   end
 
   # GET /short_links/new
@@ -27,7 +75,16 @@ class ShortLinksController < ApplicationController
   # POST /short_links or /short_links.json
   def create
     @short_link = ShortLink.new(short_link_params)
-    @short_link.short_url = Digest::SHA256.hexdigest(@short_link.url).first(7)
+    @short_link.short_url = Digest::SHA256.hexdigest(@short_link.url + current_user.id.to_s).first(7)
+
+    unless @short_link.url.include?("http://") || @short_link.url.include?("https://")
+      @short_link.url = "http://" + @short_link.url
+    end
+
+    if @short_link.expiration_date
+      @e_date = @short_link.expiration_date
+      @short_link.expiration_date = DateTime.new(@e_date.year, @e_date.month, @e_date.day, 0, 0, 0)
+    end
 
     respond_to do |format|
       if @short_link.save
@@ -62,6 +119,15 @@ class ShortLinksController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  def decrease_usages
+    if @short_link.usages
+      @short_link.usages -= 1
+      @short_link.save
+    end
+    return nil
+  end
+  helper_method :decrease_usages
 
   private
     # Use callbacks to share common setup or constraints between actions.

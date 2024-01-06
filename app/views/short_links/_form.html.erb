@@ -22,7 +22,7 @@
 
   <div>
     <%= form.label :expiration_date, style: "display: block", class:"block text-gray-700 text-sm font-bold" %>
-    <%= form.datetime_field :expiration_date, min: Date.today+1, class:"shadow appearance-none border rounded text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-8" %>
+    <%= form.date_field :expiration_date, min: Date.today+1, class:"shadow appearance-none border rounded text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-8" %>
   </div>
 
   <div>
@@ -32,7 +32,7 @@
 
   <div>
     <%= form.label :usages, style: "display: block", class:"block text-gray-700 text-sm font-bold" %>
-    <%= form.number_field :usages, min: 0, class:"shadow appearance-none border rounded text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-8" %>
+    <%= form.number_field :usages, min: 0, max: 100, class:"shadow appearance-none border rounded text-gray-700 leading-tight focus:outline-none focus:shadow-outline mb-8" %>
   </div>
 
   <div>
