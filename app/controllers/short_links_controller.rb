@@ -8,6 +8,7 @@ class ShortLinksController < ApplicationController
 
   # GET /short_links/1 or /short_links/1.json
   def show
+    @reports = Report.where('short_link_id': params[:id])
   end
 
   # GET /access/1 or /short_links/1.json
@@ -128,6 +129,20 @@ class ShortLinksController < ApplicationController
     return nil
   end
   helper_method :decrease_usages
+
+  def generate_report
+    @report = Report.new()
+
+    @report.short_link_id = @short_link.id
+    @report.date = Date.today
+    @report.hour = Time.now.localtime
+    @report.ip = request.remote_ip
+    @report.user_agent = request.user_agent
+    @report.save
+
+    return nil
+  end
+  helper_method :generate_report  
 
   private
     # Use callbacks to share common setup or constraints between actions.

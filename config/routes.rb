@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'report/list'
   resources :short_links
   devise_for :users
   

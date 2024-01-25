@@ -1,9 +1,9 @@
 <tr>
   <td class="border border-slate-700">
-    <%= link_to "http://chq.to/l/" + short_link.short_url, "http://127.0.0.1:3000/l/" + short_link.short_url, class: "text-sky-700 hover:underline hover:text-sky-900" %>
+    <%= link_to "http://chq.to/l/" + short_link.short_url, "http://127.0.0.1:3000/l/" + short_link.short_url, class: "text-sky-700 hover:underline hover:text-sky-900", target: :_blank %>
   </td>
   <td class="border border-slate-700">
-    <%= link_to short_link.url, short_link.url, class: "text-sky-700 hover:underline hover:text-sky-900" %>
+    <%= link_to short_link.url, short_link.url, class: "text-sky-700 hover:underline hover:text-sky-900", target: :_blank %>
   </td>
   <td class="border border-slate-700">
     <%= short_link.expiration_date ? short_link.expiration_date.to_date : "N/A"%>

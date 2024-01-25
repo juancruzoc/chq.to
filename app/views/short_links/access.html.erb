@@ -7,6 +7,8 @@
         <h1 class="text-xl font-bold text-center ml-2"> in 5 seconds.</h1>
     </div>
 
+    <%= generate_report %>
+
 <% else %>
 
     <% if  @short_link.expiration_date and @short_link.expiration_date.to_date <= Date.today  %>
@@ -64,6 +66,7 @@
                     <h1 class="text-xl font-bold text-center ml-2"> in 5 seconds.</h1>
 
                     <%= decrease_usages %>
+                    <%= generate_report %>
                 </div>
 
             <% end %>

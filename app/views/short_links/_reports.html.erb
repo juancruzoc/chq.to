@@ -1,0 +1,18 @@
+<% if reports %>
+  <% reports.each do |report| %>
+    <tr>
+      <td class="border border-slate-700">
+        <%= report.ip %>
+      </td>
+      <td class="border border-slate-700">
+        <%= report.date %>
+      </td>
+      <td class="border border-slate-700">
+        <%= report.hour.strftime("%H:%M:%S") %>
+      </td>
+      <td class="border border-slate-700">
+        <%= report.user_agent.split[0] %>
+      </td>
+    </tr>
+  <% end %>
+<% end %>

@@ -14,13 +14,13 @@
                 <tbody>
                     <tr>
                         <td class="border border-slate-700">
-                            <%= link_to "http://chq.to/l/" + @short_link.short_url, "http://127.0.0.1:3000/l/" + @short_link.short_url, class: "text-sky-700 hover:underline hover:text-sky-900" %>
+                            <%= link_to "http://chq.to/l/" + @short_link.short_url, "http://127.0.0.1:3000/l/" + @short_link.short_url, class: "text-sky-700 hover:underline hover:text-sky-900", target: :_blank %>
                         </td>
                         <td class="border border-slate-700">
-                            <%= link_to @short_link.url, @short_link.url, class: "text-sky-700 hover:underline hover:text-sky-900" %>
+                            <%= link_to @short_link.url, @short_link.url, class: "text-sky-700 hover:underline hover:text-sky-900", target: :_blank %>
                         </td>
                         <td class="border border-slate-700">
-                            <%= @short_link.expiration_date ? @short_link.expiration_date : "N/A"%>
+                            <%= @short_link.expiration_date ? @short_link.expiration_date.to_date : "N/A"%>
                         </td>
                         <td class="border border-slate-700">
                             <%= @short_link.password != "" ? @short_link.password : "N/A"%>
@@ -40,4 +40,35 @@
 
         <%= button_to "Delete", @short_link, method: :delete, class: "bg-rose-500 hover:bg-rose-700 text-white font-bold py-2 px-4 rounded m-2" %>
     </div>
+
+    <%= turbo_frame_tag "reports", class: "shadow overflow-hidden rounded border-b border-gray-200" do %>
+        <div id="reports">
+            <div class="flex  justify-end mr-60 mb-1">
+                <%= form_with url: report_list_path, method: :get do |form| %>
+                <%= form.hidden_field :id, value: @short_link.id, class: "border border-blue-500 rounded p-2" %>
+                <%= form.text_field :user_agent, placeholder: "Search by user agent", value: params[:user_agent], class: "border border-blue-500 rounded p-2" %>
+                <%= form.button "Search", class: "bg-blue-500 text-white p-2 rounded-sm" %>
+                <% end %>
+            </div>
+            <div class="flex items-center text-center justify-center">
+                <table class="table-fixed w-4/6 bg-white-500 border-collapse border-spacing-1 border-collapse border border-slate-500 mt-2">
+                    <thead class="bg-sky-400">
+                        <tr>
+                            <th class="border border-slate-600">IP Address</th>
+                            <th class="border border-slate-600">Date</th>
+                            <th class="border border-slate-600">Time</th>
+                            <th class="border border-slate-600">User Agent</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <%= render "reports", reports: @reports %>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    <% end %>
+
 </div>
