@@ -16,7 +16,7 @@
  	- [Technical specification](#technical-specification)
   - [Setup](#setup)
    	- [Prerequires](#prerequires)
-    	- [Steps](#steps)
+	- [Steps](#steps)
     	
 
 ## Technical information
