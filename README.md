@@ -45,7 +45,9 @@ Used the default js provided by Rails, [Tailwind](https://tailwindcss.com/) was 
 Have ruby, rails and npm installed.
 
 ### Steps
-Run bundle install
-rails db:migrate
-npm install
+* Run bundle install
+* Run npm install
+* Run rails db:migrate
+* Run rails db:seed
+* Run ./bin/dev
 

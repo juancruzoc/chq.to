@@ -1,4 +1,5 @@
 class ShortLinksController < ApplicationController
+  before_action :authenticate_user!, only: [:show, :new, :edit, :create, :update, :destroy, :index]
   before_action :set_short_link, only: %i[ show edit update destroy ]
 
   # GET /short_links or /short_links.json
@@ -8,7 +9,8 @@ class ShortLinksController < ApplicationController
 
   # GET /short_links/1 or /short_links/1.json
   def show
-    @reports = Report.where('short_link_id': params[:id])
+    @q = Report.ransack(params[:q])
+    @reports = @q.result(distinct: true)
   end
 
   # GET /access/1 or /short_links/1.json
@@ -87,27 +89,19 @@ class ShortLinksController < ApplicationController
       @short_link.expiration_date = DateTime.new(@e_date.year, @e_date.month, @e_date.day, 0, 0, 0)
     end
 
-    respond_to do |format|
-      if @short_link.save
-        format.html { redirect_to short_link_url(@short_link), notice: "Short link was successfully created." }
-        format.json { render :show, status: :created, location: @short_link }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @short_link.errors, status: :unprocessable_entity }
-      end
+    if @short_link.save
+      redirect_to short_link_url(@short_link), notice: "Short link was successfully created."
+    else
+      render :new, status: :unprocessable_entity
     end
   end
 
   # PATCH/PUT /short_links/1 or /short_links/1.json
   def update
-    respond_to do |format|
-      if @short_link.update(short_link_params)
-        format.html { redirect_to short_link_url(@short_link), notice: "Short link was successfully updated." }
-        format.json { render :show, status: :ok, location: @short_link }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @short_link.errors, status: :unprocessable_entity }
-      end
+    if @short_link.update(short_link_params)
+      redirect_to short_link_url(@short_link), notice: "Short link was successfully updated."
+    else
+      render :edit, status: :unprocessable_entity
     end
   end
 
@@ -115,10 +109,7 @@ class ShortLinksController < ApplicationController
   def destroy
     @short_link.destroy!
 
-    respond_to do |format|
-      format.html { redirect_to root_path, notice: "Short link was successfully destroyed." }
-      format.json { head :no_content }
-    end
+    redirect_to root_path, notice: "Short link was successfully destroyed."
   end
 
   def decrease_usages
@@ -147,7 +138,11 @@ class ShortLinksController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_short_link
-      @short_link = ShortLink.find(params[:id])
+      @short_link = ShortLink.find_by(id: params[:id], 'user_id': current_user.id)
+
+      if !@short_link
+        render :file => "#{Rails.root}/public/404.html", :layout => false, :status => :not_found
+      end
     end
 
     # Only allow a list of trusted parameters through.
