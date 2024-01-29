@@ -14,6 +14,9 @@
  	- [Links reports](#links-reports)
   - [UI/Frontend](#uifrontend)
  	- [Technical specification](#technical-specification)
+  - [Setup](#setup)
+   	- [Prerequires](#prerequires)
+    	- [Steps](#steps)
     	
 
 ## Technical information
