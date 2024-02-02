@@ -14,6 +14,22 @@ class ShortLinksController < ApplicationController
   # GET /access/1 or /short_links/1.json
   def access
     @short_link = ShortLink.find_by(short_url: params[:short_url])
+
+    if  @short_link.expiration_date and @short_link.expiration_date.to_date <= Date.today
+      @message = "The link that you are trying to access has expired."
+      render 'unavailable_access'
+    else
+      if @short_link.usages and @short_link.usages.to_i <= 0
+        @message = "The link that you are trying to access has no usages left."
+        render 'unavailable_access'
+      else
+        if @short_link.password != ""
+          render 'password_protected_access'
+        else
+          render 'access'
+        end
+      end
+    end
   end
 
   def validate_password
@@ -28,8 +44,7 @@ class ShortLinksController < ApplicationController
 
     else
 
-      flash.alert = "Incorrect password."
-      redirect_to '/l/' + @short_link.short_url
+      redirect_to '/l/' + @short_link.short_url, :flash => { :error => "Incorrect Password." }
 
     end
 
