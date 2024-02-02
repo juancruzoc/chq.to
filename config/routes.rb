@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
-  get 'report/list'
   resources :short_links
+  resources :reports
   devise_for :users
   
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   get "up" => "rails/health#show", as: :rails_health_check
 
   get "l/:short_url" => "short_links#access"
+  get "reports/:short_link_id" => "report#show"
 
   post "l/:short_url" => "short_links#validate_password" 
 

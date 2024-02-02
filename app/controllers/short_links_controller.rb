@@ -9,58 +9,27 @@ class ShortLinksController < ApplicationController
 
   # GET /short_links/1 or /short_links/1.json
   def show
-    @q = Report.ransack(params[:q])
-    @reports = @q.result(distinct: true)
   end
 
   # GET /access/1 or /short_links/1.json
   def access
-    @short_link = ShortLink.where('short_url': params[:short_url])[0]
-
-    @password_validated = false
-    @messages = ""
-
-    @password = params.has_key?(:password) ? params.require(:password) : ""
-
-    if @password and @password == @short_link.password
-      
-      @password_validated = true
-
-    else
-
-      if @password != ""
-
-        @password_validated = false
-        @messages = "Incorrect password."
-
-      end
-
-    end
-
+    @short_link = ShortLink.find_by(short_url: params[:short_url])
   end
 
   def validate_password
 
-    @short_link = ShortLink.where('short_url': params[:short_url])[0]
+    @short_link = ShortLink.find_by(short_url: params[:short_url])
 
-    @password_validated = false
-    @messages = ""
-
-    @password = params.has_key?(:password) ? params.require(:password) : ""
-
-    if @password and @password == @short_link.password
+    if params[:password] == @short_link.password
       
-      @password_validated = true
-      # redirect_to @short_link.url
+      decrease_usages()
+      generate_report()
+      redirect_to @short_link.url, allow_other_host: true
 
     else
 
-      if @password != ""
-
-        @password_validated = false
-        @messages = "Incorrect password."
-
-      end
+      flash.alert = "Incorrect password."
+      redirect_to '/l/' + @short_link.short_url
 
     end
 

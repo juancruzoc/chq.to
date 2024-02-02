@@ -41,12 +41,7 @@
         <%= button_to "Delete", @short_link, method: :delete, class: "bg-rose-500 hover:bg-rose-700 text-white font-bold py-2 px-4 rounded m-2" %>
     </div>
 
-<% if false %>
-    <%= search_form_for @q do |f| %>
-        <%= f.label :ip %>
-        <%= f.search_field :ip %>
-        <%= f.submit %>
-    <% end %>
+
     <div class="flex items-center text-center justify-center">
         <table class="table-fixed w-4/6 bg-white-500 border-collapse border-spacing-1 border-collapse border border-slate-500 mt-2">
             <thead class="bg-sky-400">
@@ -64,6 +59,5 @@
             </tbody>
         </table>
     </div>
-<% end %>
 
 </div>
