@@ -17,11 +17,11 @@ class ShortLinksController < ApplicationController
 
     if  @short_link.expiration_date and @short_link.expiration_date.to_date <= Date.today
       @message = "The link that you are trying to access has expired."
-      render 'unavailable_access'
+      render 'unavailable_access', status: :not_found
     else
       if @short_link.usages and @short_link.usages.to_i <= 0
         @message = "The link that you are trying to access has no usages left."
-        render 'unavailable_access'
+        render 'unavailable_access', status: :forbidden
       else
         if @short_link.password != ""
           render 'password_protected_access'
