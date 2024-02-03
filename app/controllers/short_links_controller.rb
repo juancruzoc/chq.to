@@ -74,7 +74,7 @@ class ShortLinksController < ApplicationController
     end
 
     if @short_link.save
-      redirect_to short_link_url(@short_link), notice: "Short link was successfully created."
+      redirect_to '/', notice: "Short link was successfully created."
     else
       render :new, status: :unprocessable_entity
     end
@@ -83,7 +83,7 @@ class ShortLinksController < ApplicationController
   # PATCH/PUT /short_links/1 or /short_links/1.json
   def update
     if @short_link.update(short_link_params)
-      redirect_to short_link_url(@short_link), notice: "Short link was successfully updated."
+      redirect_to '/', notice: "Short link was successfully updated."
     else
       render :edit, status: :unprocessable_entity
     end
