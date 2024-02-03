@@ -1,61 +1,61 @@
 <div>
+    <%= flash.discard; nil %>
+    <% if user_signed_in? %>
 
-<% if user_signed_in? %>
+        <div class="flex items-center text-center justify-center">
 
-    <div class="flex items-center text-center justify-center">
+            <h1 class="text-2xl font-bold underline text-center mr-5">Short links</h1>
 
-        <h1 class="text-2xl font-bold underline text-center mr-5">Short links</h1>
+            <%= button_to new_short_link_path, method: :get do %>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 text-sky-500 hover:text-sky-700">
+                    <path fill-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25ZM12.75 9a.75.75 0 0 0-1.5 0v2.25H9a.75.75 0 0 0 0 1.5h2.25V15a.75.75 0 0 0 1.5 0v-2.25H15a.75.75 0 0 0 0-1.5h-2.25V9Z" clip-rule="evenodd" />
+                </svg>
+            <% end %>
 
-        <%= button_to new_short_link_path, method: :get do %>
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 text-sky-500 hover:text-sky-700">
-                <path fill-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25ZM12.75 9a.75.75 0 0 0-1.5 0v2.25H9a.75.75 0 0 0 0 1.5h2.25V15a.75.75 0 0 0 1.5 0v-2.25H15a.75.75 0 0 0 0-1.5h-2.25V9Z" clip-rule="evenodd" />
-            </svg>
-        <% end %>
-
-    </div>
-
-    <div id="short_links">
-        <% if @short_links.size != 0 %>
-            <div class="flex items-center text-center justify-center">
-                <table class="table-fixed w-4/6 bg-white-500 border-collapse border-spacing-1 border-collapse border border-slate-500 mt-2">
-                    <thead class="bg-sky-400">
-                        <tr>
-                            <th class="border border-slate-600">Short Url</th>
-                            <th class="border border-slate-600">Url</th>
-                            <th class="border border-slate-600">Expiration Date</th>
-                            <th class="border border-slate-600">Password</th>
-                            <th class="border border-slate-600">Usages</th>
-                            <th class="border border-slate-600">Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <% @short_links.each do |short_link| %>
-                            <%= render short_link %>
-                        <% end %>
-                    </tbody>
-                </table>
-            </div>
-
-        <% else %>
-
-            <div class="flex items-center text-center justify-center">
-
-                <h1 class="text-xl font-bold text-center mt-20">Currently you don't have any short links to display.</h1>
-
-            </div>
-
-        <% end %>
-    </div>
-<% else %>
-    <div class="flex items-center text-center justify-center grid grid-cols-12 content-start">
-        <div class="col-start-2 col-span-4 ml-8">
-            <p class="text-2xl font-bold">Create shortened URLs to easily enforce the connection between your content and your audience across the internet.</p>
         </div>
 
-        <div class="col-start-7 col-span-4 ml-8">
-            <%= image_tag("shortened.png") %>
+        <div id="short_links">
+            <% if @short_links.size != 0 %>
+                <div class="flex items-center text-center justify-center">
+                    <table class="table-fixed w-4/6 bg-white-500 border-collapse border-spacing-1 border-collapse border border-slate-500 mt-2">
+                        <thead class="bg-sky-400">
+                            <tr>
+                                <th class="border border-slate-600">Short Url</th>
+                                <th class="border border-slate-600">Url</th>
+                                <th class="border border-slate-600">Expiration Date</th>
+                                <th class="border border-slate-600">Password</th>
+                                <th class="border border-slate-600">Usages</th>
+                                <th class="border border-slate-600">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% @short_links.each do |short_link| %>
+                                <%= render short_link %>
+                            <% end %>
+                        </tbody>
+                    </table>
+                </div>
+
+            <% else %>
+
+                <div class="flex items-center text-center justify-center">
+
+                    <h1 class="text-xl font-bold text-center mt-20">Currently you don't have any short links to display.</h1>
+
+                </div>
+
+            <% end %>
         </div>
-    </div>
-<% end %>
+    <% else %>
+        <div class="flex items-center text-center justify-center grid grid-cols-12 content-start">
+            <div class="col-start-2 col-span-4 ml-8">
+                <p class="text-2xl font-bold">Create shortened URLs to easily enforce the connection between your content and your audience across the internet.</p>
+            </div>
+
+            <div class="col-start-7 col-span-4 ml-8">
+                <%= image_tag("shortened.png") %>
+            </div>
+        </div>
+    <% end %>
 
 </div>
