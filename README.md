@@ -37,7 +37,7 @@ I treated all the links as the same, only evaluating if they have password, expi
 ### Links access
 Generated a new action in the Short Link controller providing the access to the shortened links created.
 ### Links reports
-To do
+Generated a Report model with the show action, this action implements [Ransack](https://github.com/activerecord-hackery/ransack) for the search.
 
 ## UI/Frontend
 ### Technical specification
