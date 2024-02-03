@@ -15,7 +15,7 @@
     </div>
 
     <div id="short_links">
-        <% if @short_links %>
+        <% if @short_links.size != 0 %>
             <div class="flex items-center text-center justify-center">
                 <table class="table-fixed w-4/6 bg-white-500 border-collapse border-spacing-1 border-collapse border border-slate-500 mt-2">
                     <thead class="bg-sky-400">
@@ -34,7 +34,16 @@
                         <% end %>
                     </tbody>
                 </table>
-                </div>
+            </div>
+
+        <% else %>
+
+            <div class="flex items-center text-center justify-center">
+
+                <h1 class="text-xl font-bold text-center mt-20">Currently you don't have any short links to display.</h1>
+
+            </div>
+
         <% end %>
     </div>
 <% else %>

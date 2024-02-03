@@ -8,34 +8,48 @@
         <% end %>
     </div>
 
-    <%= search_form_for @q, url: "#{@short_link.id}", class: "text-center mt-4 mb-2" do |f| %>
-        <div class= "mt-2">
-            <%= f.search_field :ip_cont, placeholder: "Ip Address" %>
-            <%= f.search_field :user_agent_cont, placeholder: "User agent" %>
-        </div>
-        <div class= "mt-2">
-            <%= f.date_field :date_gteq, placeholder: "Start date" %>
-            <%= f.date_field :date_lteq, placeholder: "End date" %>
+    <% if @reports.size != 0 %>
+
+        <div>
+            <%= search_form_for @q, url: "#{@short_link.id}", class: "text-center mt-4 mb-2" do |f| %>
+                <div class= "mt-2">
+                    <%= f.search_field :ip_cont, placeholder: "Ip Address" %>
+                    <%= f.search_field :user_agent_cont, placeholder: "User agent" %>
+                </div>
+                <div class= "mt-2">
+                    <%= f.date_field :date_gteq, placeholder: "Start date" %>
+                    <%= f.date_field :date_lteq, placeholder: "End date" %>
+                </div>
+
+                <%= f.button "Search", type: "submit", :class=> "mt-2 bg-sky-500 hover:bg-sky-700 text-white font-bold py-2 px-4 rounded" %>
+            <% end %>
+
+            <div class="flex items-center text-center justify-center">
+                <table class="table-fixed w-4/6 bg-white-500 border-collapse border-spacing-1 border-collapse border border-slate-500 mt-2">
+                    <thead class="bg-sky-400">
+                        <tr>
+                            <th class="border border-slate-600">IP Address</th>
+                            <th class="border border-slate-600"><%= link_to "Date", :sort => "date"%></th>
+                            <th class="border border-slate-600">Time</th>
+                            <th class="border border-slate-600">User Agent</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <%= render "reports", reports: @reports %>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
 
-        <%= f.button "Search", type: "submit", :class=> "mt-2 bg-sky-500 hover:bg-sky-700 text-white font-bold py-2 px-4 rounded" %>
+    <% else %>
+
+        <div class="flex items-center text-center justify-center">
+
+            <h1 class="text-xl font-bold text-center mt-20">Currently you don't have any reports on this short link to display.</h1>
+
+        </div>
+
     <% end %>
-
-    <div class="flex items-center text-center justify-center">
-        <table class="table-fixed w-4/6 bg-white-500 border-collapse border-spacing-1 border-collapse border border-slate-500 mt-2">
-            <thead class="bg-sky-400">
-                <tr>
-                    <th class="border border-slate-600">IP Address</th>
-                    <th class="border border-slate-600"><%= link_to "Date", :sort => "date"%></th>
-                    <th class="border border-slate-600">Time</th>
-                    <th class="border border-slate-600">User Agent</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <%= render "reports", reports: @reports %>
-                </tr>
-            </tbody>
-        </table>
-    </div>
 </div>
