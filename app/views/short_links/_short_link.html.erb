@@ -1,6 +1,6 @@
 <tr>
   <td class="border border-slate-700">
-    <%= link_to "http://chq.to/l/" + short_link.short_url, "http://#{request.host}:3000/l/" + short_link.short_url, class: "text-sky-700 hover:underline hover:text-sky-900", target: :_blank %>
+    <%= link_to short_url_path(short_link.short_url), short_url_path(short_link.short_url), class: "text-sky-700 hover:underline hover:text-sky-900", target: :_blank %>
   </td>
   <td class="border border-slate-700">
     <%= link_to short_link.url, short_link.url, class: "text-sky-700 hover:underline hover:text-sky-900", target: :_blank %>
