@@ -1,11 +1,6 @@
 class ShortLinksController < ApplicationController
-  before_action :authenticate_user!, only: [:show, :new, :edit, :create, :update, :destroy, :index]
+  before_action :authenticate_user!, only: [:show, :new, :edit, :create, :update, :destroy]
   before_action :set_short_link, only: %i[ show edit update destroy ]
-
-  # GET /short_links or /short_links.json
-  def index
-    @short_links = ShortLink.all
-  end
 
   # GET /short_links/1 or /short_links/1.json
   def show
@@ -26,6 +21,8 @@ class ShortLinksController < ApplicationController
         if @short_link.password != ""
           render 'password_protected_access'
         else
+          @short_link.decrease_usages
+          generate_report
           render 'access'
         end
       end
@@ -38,7 +35,7 @@ class ShortLinksController < ApplicationController
 
     if params[:password] == @short_link.password
       
-      decrease_usages()
+      @short_link.decrease_usages
       generate_report()
       redirect_to @short_link.url, allow_other_host: true
 
@@ -62,16 +59,7 @@ class ShortLinksController < ApplicationController
   # POST /short_links or /short_links.json
   def create
     @short_link = ShortLink.new(short_link_params)
-    @short_link.short_url = Digest::SHA256.hexdigest(@short_link.url + current_user.id.to_s).first(7)
-
-    unless @short_link.url.include?("http://") || @short_link.url.include?("https://")
-      @short_link.url = "http://" + @short_link.url
-    end
-
-    if @short_link.expiration_date
-      @e_date = @short_link.expiration_date
-      @short_link.expiration_date = DateTime.new(@e_date.year, @e_date.month, @e_date.day, 0, 0, 0)
-    end
+    @short_link.user_id = current_user.id
 
     if @short_link.save
       redirect_to '/', notice: "Short link was successfully created."
@@ -95,15 +83,6 @@ class ShortLinksController < ApplicationController
 
     redirect_to root_path, notice: "Short link was successfully destroyed."
   end
-
-  def decrease_usages
-    if @short_link.usages
-      @short_link.usages -= 1
-      @short_link.save
-    end
-    return nil
-  end
-  helper_method :decrease_usages
 
   def generate_report
     @report = Report.new()
