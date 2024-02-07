@@ -1,10 +1,6 @@
 class ShortLinksController < ApplicationController
-  before_action :authenticate_user!, only: [:show, :new, :edit, :create, :update, :destroy]
-  before_action :set_short_link, only: %i[ show edit update destroy ]
-
-  # GET /short_links/1 or /short_links/1.json
-  def show
-  end
+  before_action :authenticate_user!, only: [:new, :edit, :create, :update, :destroy]
+  before_action :set_short_link, only: %i[ edit update destroy ]
 
   # GET /access/1 or /short_links/1.json
   def access
@@ -22,7 +18,7 @@ class ShortLinksController < ApplicationController
           render 'password_protected_access'
         else
           @short_link.decrease_usages
-          generate_report
+          Report.new().generate(@short_link.id, request)
           render 'access'
         end
       end
@@ -36,7 +32,7 @@ class ShortLinksController < ApplicationController
     if params[:password] == @short_link.password
       
       @short_link.decrease_usages
-      generate_report()
+      Report.new().generate(@short_link.id, request)
       redirect_to @short_link.url, allow_other_host: true
 
     else
@@ -82,21 +78,7 @@ class ShortLinksController < ApplicationController
     @short_link.destroy!
 
     redirect_to root_path, notice: "Short link was successfully destroyed."
-  end
-
-  def generate_report
-    @report = Report.new()
-
-    @report.short_link_id = @short_link.id
-    @report.date = Date.today
-    @report.hour = Time.now.localtime
-    @report.ip = request.remote_ip
-    @report.user_agent = request.user_agent
-    @report.save
-
-    return nil
-  end
-  helper_method :generate_report  
+  end 
 
   private
     # Use callbacks to share common setup or constraints between actions.
