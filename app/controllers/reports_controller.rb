@@ -7,6 +7,7 @@ class ReportsController < ApplicationController
       not_found
     else
       @q = Report.ransack(params[:q])
+      @q.sorts = ['date desc', 'hour desc']
       @reports = @q.result(distinct: true).where(short_link_id: @short_link.id)
     end
   end
