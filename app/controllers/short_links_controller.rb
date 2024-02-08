@@ -1,5 +1,6 @@
 class ShortLinksController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :edit, :create, :update, :destroy]
+  before_action :authenticate_user!
+  skip_before_action :authenticate_user!, only: [:access]
   before_action :set_short_link, only: %i[ edit update destroy ]
 
   # GET /access/1 or /short_links/1.json
@@ -18,7 +19,7 @@ class ShortLinksController < ApplicationController
           render 'password_protected_access'
         else
           @short_link.decrease_usages
-          Report.new().generate(@short_link.id, request)
+          Report.new.generate(@short_link.id, request).save
           render 'access'
         end
       end
@@ -32,7 +33,7 @@ class ShortLinksController < ApplicationController
     if params[:password] == @short_link.password
       
       @short_link.decrease_usages
-      Report.new().generate(@short_link.id, request)
+      Report.new.generate(@short_link.id, request).save
       redirect_to @short_link.url, allow_other_host: true
 
     else
