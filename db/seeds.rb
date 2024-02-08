@@ -39,7 +39,6 @@ end
 @default_link = ShortLink.new({
   user_id: @test_user.id,
   url: "http://facebook.com",
-  short_url: "4f7c06c",
   password: ""
 })
 @default_link.save
@@ -48,7 +47,6 @@ generate_reports @default_link.id
 @password_protected_link = ShortLink.new({
   user_id: @test_user.id,
   url: "http://x.com",
-  short_url: "1b3b988",
   password: "123123"
 })
 @password_protected_link.save
@@ -57,7 +55,6 @@ generate_reports @password_protected_link.id
 @not_expired_link = ShortLink.new({
   user_id: @test_user.id,
   url: "http://medium.com",
-  short_url: "c371990",
   password: "",
   expiration_date: Date.new(2025,01,31),
 })
@@ -67,7 +64,6 @@ generate_reports @not_expired_link.id
 @usages_capped_link = ShortLink.new({
   user_id: @test_user.id,
   url: "http://youtube.com",
-  short_url: "64aa817",
   password: "",
   usages: "50"
 })
@@ -77,7 +73,6 @@ generate_reports @usages_capped_link.id
 @zero_usages_link = ShortLink.new({
   user_id: @test_user.id,
   url: "http://linkedin.com",
-  short_url: "e5373d5",
   password: "",
   usages: "0"
 })
