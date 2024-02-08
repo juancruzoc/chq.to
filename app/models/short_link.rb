@@ -5,7 +5,17 @@ class ShortLink < ApplicationRecord
     validates :password, length: { maximum: 25 }
     validates :usages, length: { maximum: 100 }
 
-    before_validation do
+    before_validation :init_setup, on: [ :create, :update ]
+
+    def decrease_usages
+        if self.usages
+            self.usages -= 1
+            self.save
+        end
+    end
+
+    private
+    def init_setup
         unless self.url.include?("http://") || self.url.include?("https://")
             self.url = "http://" + self.url
         end
@@ -15,13 +25,6 @@ class ShortLink < ApplicationRecord
         if self.expiration_date
             @e_date = self.expiration_date
             self.expiration_date = DateTime.new(@e_date.year, @e_date.month, @e_date.day, 0, 0, 0)
-        end
-    end
-
-    def decrease_usages
-        if self.usages
-            self.usages -= 1
-            self.save
         end
     end
 end
